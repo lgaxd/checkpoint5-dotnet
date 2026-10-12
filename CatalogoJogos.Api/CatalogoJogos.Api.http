@@ -1,0 +1,55 @@
+@baseUrl = http://localhost:5162
+
+### Criar jogo (201)
+POST {{baseUrl}}/api/jogos
+Content-Type: application/json
+
+{
+  "titulo": "Gran Turismo 5",
+  "plataforma": "PlayStation 3",
+  "genero": "Corrida",
+  "preco": 79.90,
+  "anoLancamento": 2010,
+  "estoque": 12
+}
+
+### Criar jogo inválido (400)
+POST {{baseUrl}}/api/jogos
+Content-Type: application/json
+
+{
+  "titulo": "",
+  "plataforma": "Xbox 360",
+  "genero": "Ação",
+  "preco": -10,
+  "anoLancamento": 2008,
+  "estoque": 5
+}
+
+### Listar todos (200)
+GET {{baseUrl}}/api/jogos
+
+### Buscar por ID (200 / 404) - troque pelo ID retornado no POST
+GET {{baseUrl}}/api/jogos/000000000000000000000000
+
+### Atualizar (200 / 404)
+PUT {{baseUrl}}/api/jogos/000000000000000000000000
+Content-Type: application/json
+
+{
+  "titulo": "Gran Turismo 5 - Edição de Colecionador",
+  "plataforma": "PlayStation 3",
+  "genero": "Corrida",
+  "preco": 99.90,
+  "anoLancamento": 2010,
+  "estoque": 8
+}
+
+### Remover (204 / 404)
+DELETE {{baseUrl}}/api/jogos/000000000000000000000000
+
+### Desafio 1 - Filtro por plataforma e preço máximo
+GET {{baseUrl}}/api/jogos/busca?plataforma=PlayStation%203&precoMaximo=100
+
+### Desafio 2 - Relatório de estoque por plataforma
+GET {{baseUrl}}/api/jogos/relatorio-estoque
